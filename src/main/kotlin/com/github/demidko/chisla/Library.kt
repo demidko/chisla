@@ -1,4 +1,4 @@
-package com.github.demidko.library
+package com.github.demidko.chisla
 
 class Library {
   fun someLibraryMethod(): Boolean {
