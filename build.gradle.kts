@@ -8,7 +8,8 @@ plugins {
   kotlin("jvm") version "1.5.31"
 }
 dependencies {
-  implementation("com.github.demidko:aot:2021.10.09")
+  api("com.github.demidko:aot:2021.10.19")
+  api("com.github.demidko:tokenizer:2021.10.20")
   testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
   testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.25")
   testImplementation("io.mockk:mockk:1.12.0")
@@ -20,8 +21,7 @@ tasks.test {
 }
 publishing {
   publications {
-    create<MavenPublication>("library") {
-      groupId = "com.github.demidko"
+    create<MavenPublication>("chisla") {
       from(components["java"])
     }
   }
