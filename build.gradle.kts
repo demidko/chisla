@@ -10,6 +10,7 @@ plugins {
 dependencies {
   api("com.github.demidko:aot:2021.10.28")
   api("com.github.demidko:tokenizer:2021.10.20")
+  testImplementation("com.ibm.icu:icu4j:70.1")
   testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
   testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.25")
   testImplementation("io.mockk:mockk:1.12.0")
