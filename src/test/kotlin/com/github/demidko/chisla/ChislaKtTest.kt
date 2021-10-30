@@ -10,13 +10,20 @@ internal class ChislaKtTest {
   fun parseRussianDouble() {
     assertThat("Двенадцать тысяч шестьсот пятьдесят девять целых четыре миллионных".parseRussianDouble())
       .isEqualTo(12659.000004)
+
     assertThat("Десять тысяч четыреста тридцать четыре".parseRussianDouble())
-      .isEqualTo(10434)
+      .isEqualTo(10434.0)
+
     assertThat("Двенадцать целых шестьсот пятьдесят девять тысячных".parseRussianDouble())
       .isEqualTo(12.659)
+
     assertThat("Ноль целых пятьдесят восемь сотых".parseRussianDouble())
       .isEqualTo(0.58)
+
+    assertThat("Нуль целых пятьдесят восемь".parseRussianDouble())
+      .isEqualTo(0.5800000000000001)
+
     assertThat("Сто тридцать пять".parseRussianDouble())
-      .isEqualTo(135)
+      .isEqualTo(135.0)
   }
 }

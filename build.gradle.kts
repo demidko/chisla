@@ -8,7 +8,7 @@ plugins {
   kotlin("jvm") version "1.5.31"
 }
 dependencies {
-  api("com.github.demidko:aot:2021.10.19")
+  api("com.github.demidko:aot:2021.10.28")
   api("com.github.demidko:tokenizer:2021.10.20")
   testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
   testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.25")

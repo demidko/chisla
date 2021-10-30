@@ -5,8 +5,17 @@ import com.github.demidko.aot.PartOfSpeech.OrdinalNumber
 import com.github.demidko.aot.WordformMeaning.lookupForMeanings
 import com.github.demidko.tokenizer.tokenize
 
-private val numbers = Numbers()
 private val separators = setOf("целых", "плюс", "да", "и", ",", ".")
+
+private val numbers =
+  {}.javaClass.getResourceAsStream("/dictionary")!!
+    .bufferedReader()
+    .readLines()
+    .flatMap { line ->
+      val aliases = line.split(' ')
+      val number = aliases.first().toDouble()
+      aliases.drop(1).map { Pair(it, number) }
+    }.toMap()
 
 fun String.parseRussianDouble() = tokenize().parseRussianDouble()
 
@@ -36,23 +45,30 @@ fun List<String>.parseRussianDouble(): Double {
       break
     }
   }
-  return integerPart.join() + fractionalPart.join()
+  if (fractionalPart.isEmpty()) {
+    return integerPart.join()
+  }
+  if (fractionalPart.last() < 1) {
+    return integerPart.join() + fractionalPart.dropLast(1).join() * fractionalPart.last()
+  }
+  var fractionalNumber = fractionalPart.join()
+  while (fractionalNumber > 1) {
+    fractionalNumber *= 0.1
+  }
+  return integerPart.join() + fractionalNumber
 }
 
 private fun List<Double>.join(): Double {
-  if (isEmpty()) {
-    return 0.0
-  }
-  var result = 0.0
-  var token = 0.0
-  for (number in this) {
-    if (number in numbers.powersOfTen) {
-      result += token * number
-      token = 0.0
-      continue
+  var tokensSum = 0.0
+  var previousToken = first()
+  for (currToken in drop(1)) {
+    if (currToken > previousToken) {
+      previousToken *= currToken
+    } else {
+      tokensSum += previousToken
+      previousToken = currToken
     }
-    token += number
   }
-  return result + token
+  return tokensSum + previousToken
 }
 
