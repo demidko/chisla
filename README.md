@@ -17,7 +17,9 @@ Java/Kotlin библиотека для распознавания чисел и
 import com.github.demidko.chisla.parseRussianDouble
 
 fun main() {
-  "Двенадцать тысяч шестьсот пятьдесят девять целых четыре миллионных".parseRussianDouble() // 12_659.000_004
+  "Двенадцать тысяч шестьсот пятьдесят девять целых четыре миллионных"
+    .parseRussianDouble() 
+    // 12_659.000_004
 }
 ```
 
